@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 
-import { getPokemons, getPokemon } from '../API.js'
+import { getPokemons, getPokemon, getPokemonImages } from '../API.js'
 
 export default function Home() {
 
-    const [pokemons, setPokemons] = useState([]);
+    const [pokemons, setPokemons] = useState([{ name: '', image: '' }]);
 
     const [newCall, setNewCall] = useState('');
 
@@ -19,11 +19,12 @@ export default function Home() {
         setPokemons([])
         getPokemons(newCall).then((response) => {
             response.data.results.forEach((result) => {
-                getPokemon(result.url).then((res)=>{
-                    console.log(res);
-                    res.data.names.forEach((names)=>{
-                        if(names.language.name === languageOption){
-                            setPokemons(old =>[...old, names.name ])
+                getPokemon(result.url).then((res) => {
+                    res.data.names.forEach((names) => {
+                        if (names.language.name === languageOption) {
+                            getPokemonImages(res.data.id).then((poke) => {
+                                setPokemons(old => [...old, { name: names.name, image: poke.data.sprites.front_default }])
+                            })
                         }
                     })
                 })
@@ -36,7 +37,7 @@ export default function Home() {
         }
         )
     }, [languageOption, newCall])
-
+    console.log(pokemons);
     return (
         <div className="p-4">
             <div className="flex items-cener justify-end">
@@ -46,9 +47,12 @@ export default function Home() {
                     <option value="fr">French</option>
                 </select>
             </div>
-            <div className="h-48">
+            <div className="">
                 {!loading && pokemons ? pokemons.map((pokemon, index) =>
-                    <h1 key={index}>{pokemon}</h1>
+                    <div className="flex">
+                        <h1 key={index}>{pokemon.name}</h1>
+                        <img src={pokemon.image} alt="" />
+                    </div>
                 )
                     :
                     <p>Loading</p>

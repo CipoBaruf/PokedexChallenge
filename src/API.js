@@ -18,3 +18,13 @@ export async function getPokemons(urlPrevNext) {
       console.error(error);
     }
   }
+
+
+  export async function getPokemonImages(id) {
+    try {
+      const response = await axios.get(`https://pokeapi.co/api/v2/pokemon/${id}`)
+      return response;
+    } catch (error) {
+      console.error(error);
+    }
+  }

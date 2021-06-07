@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 
 import { getPokemons, getPokemon, getPokemonImages } from '../API.js'
 
+import PokemonItem from '../components/PokemonItem'
+
 export default function Home() {
 
     const [pokemons, setPokemons] = useState([{ name: '', image: '' }]);
@@ -47,12 +49,9 @@ export default function Home() {
                     <option value="fr">French</option>
                 </select>
             </div>
-            <div className="">
+            <div className="flex flex-col md:flex-row space-y-4 md:space-x-4 items-center justify-center py-24">
                 {!loading && pokemons ? pokemons.map((pokemon, index) =>
-                    <div className="flex">
-                        <h1 key={index}>{pokemon.name}</h1>
-                        <img src={pokemon.image} alt="" />
-                    </div>
+                  <PokemonItem pokemon={pokemon} key={index}/>
                 )
                     :
                     <p>Loading</p>

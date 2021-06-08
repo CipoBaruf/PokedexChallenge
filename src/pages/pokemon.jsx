@@ -9,7 +9,7 @@ import { getPokemon, getPokemonStats, getPokemonData } from '../API.js'
 
 import ImageCarrousel from '../components/ImagesCarousel.jsx';
 
-export default function Pokemon(props) {
+export default function Pokemon() {
 
     const [loading, setLoading] = useState(false);
 
@@ -33,7 +33,6 @@ export default function Pokemon(props) {
         getPokemonStats(idPokemon).then((response) => {
             response.data.names.forEach((names) => {
                 if (names.language.name === languageOption) {
-                    console.log(names.name.charAt(0).toUpperCase() + names.name.slice(1))
                     setPokemonData(prevState => ({
                         ...prevState,
                         pokeName: names.name.charAt(0).toUpperCase() + names.name.slice(1),
@@ -56,18 +55,16 @@ export default function Pokemon(props) {
                     }
                 })
             })
-            console.log(pokemonData)
         })
         getPokemonData(idPokemon.toLowerCase()).then((info) => {
             setPokemonImages(info.data.sprites);
-            console.log(info)
             setPokemonData(prevState => ({
                 ...prevState,
                 height: info.data.height,
                 weight: info.data.weight,
             }));
+            setLoading(false);
         })
-        setLoading(false);
 
     }, [languageOption, idPokemon]);
 
@@ -106,7 +103,10 @@ export default function Pokemon(props) {
                     </Link>
                 </div>
                 :
-                <p>Loading</p>
+                <div className="h-screen w-screen bg-red-600">
+                    <svg className="animate-spin h-5 w-5 mr-3 ..." viewBox="0 0 24 24" />
+                    <p>Loading</p>
+                </div>
             }
         </>
     );

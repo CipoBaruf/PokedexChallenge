@@ -44,7 +44,7 @@ export default function Home() {
     return (
         <div className="p-8 h-screen w-screen bg-gray-100">
             <div className="absolute">
-                <select value={languageOption} onChange={(e) => {setLanguageOption(e.target.value); localStorage.setItem('language', e.target.value)}}>
+                <select className="md:text-xl" value={languageOption} onChange={(e) => {setLanguageOption(e.target.value); localStorage.setItem('language', e.target.value)}}>
                     <option value="es">Spanish</option>
                     <option value="en">English</option>
                     <option value="fr">French</option>

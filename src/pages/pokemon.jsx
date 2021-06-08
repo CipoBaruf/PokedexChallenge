@@ -56,7 +56,7 @@ export default function Pokemon(props) {
                 })
             })
         })
-        getPokemonData(idPokemon.toLowerCase()).then((info) => {
+        getPokemonData(idPokemon).then((info) => {
             setPokemonImages(info.data.sprites);
             setPokemonData(prevState => ({
                 ...prevState,
@@ -73,28 +73,28 @@ export default function Pokemon(props) {
             {!loading ?
                 <div className={`p-8 ${pokemonData.color} bg-opacity-25 h-screen w-screen`}>
                     <div className="absolute">
-                        <select value={languageOption} onChange={(e) => { setLanguageOption(e.target.value); localStorage.setItem('language', e.target.value) }}>
+                        <select className={`${pokemonData.color} md:text-xl`} value={languageOption} onChange={(e) => { setLanguageOption(e.target.value); localStorage.setItem('language', e.target.value) }}>
                             <option value="es">Spanish</option>
                             <option value="en">English</option>
                             <option value="fr">French</option>
                         </select>
                     </div>
                     <div className="flex flex-col items-center justify-center h-full -mt-20">
-                        <div className="bg-white absolute z-0 h-40 w-80 mt-40 rounded-xl border-gray-200 border-4"></div>
+                        <div className="bg-white absolute z-0 h-40 w-80 md:h-64 md:w-3/12 mt-40 md:mt-44 rounded-xl border-gray-200 border-4"></div>
                         <ImageCarrousel images={pokemonImages} color={pokemonData.color} />
-                        <p className="z-50 text-xl text-center font-semibold tracking-wider text-gray-700">{pokemonData.pokeName}</p>
-                        <div className="flex justify-center space-x-8 items-center z-50 mt-2">
+                        <p className="z-50 md:mt-6 text-xl md:text-4xl text-center font-semibold tracking-wider text-gray-700">{pokemonData.pokeName}</p>
+                        <div className="flex justify-center space-x-8 items-center z-50 mt-2 md:mt-4">
                             <div className="flex flex-col justify-cener items-center">
-                                <h3 className="text-md font-semibold text-gray-800">Height</h3>
-                                <p className="text-sm text-gray-700">{pokemonData.height}</p>
+                                <h3 className="text-md md:text-xl tracking-wider font-semibold text-gray-800">Height</h3>
+                                <p className="text-sm md:text-lg text-gray-700">{pokemonData.height}</p>
                             </div>
                             <div className="flex flex-col justify-cener items-center">
-                                <h3 className="text-md font-semibold text-gray-800">Weight</h3>
-                                <p className="text-sm text-gray-700">{pokemonData.weight}</p>
+                                <h3 className="text-md md:text-xl tracking-wider font-semibold text-gray-800">Weight</h3>
+                                <p className="text-sm md:text-lg text-gray-700">{pokemonData.weight}</p>
                             </div>
                             <div className="flex flex-col justify-cener items-center">
-                                <h3 className="text-md font-semibold text-gray-800">Generation</h3>
-                                <p className="text-sm text-gray-700">{pokemonData.generation}</p>
+                                <h3 className="text-md md:text-xl tracking-wider font-semibold text-gray-800">Generation</h3>
+                                <p className="text-sm md:text-lg text-gray-700">{pokemonData.generation}</p>
                             </div>
                         </div>
                     </div>

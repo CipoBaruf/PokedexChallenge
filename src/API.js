@@ -20,7 +20,7 @@ export async function getPokemons(urlPrevNext) {
   }
 
 
-  export async function getPokemonImages(id) {
+  export async function getPokemonData(id) {
     try {
       const response = await axios.get(`https://pokeapi.co/api/v2/pokemon/${id}`)
       return response;
@@ -28,3 +28,14 @@ export async function getPokemons(urlPrevNext) {
       console.error(error);
     }
   }
+
+  export async function getPokemonStats(id) {
+    try {
+      const response = await axios.get(`https://pokeapi.co/api/v2/pokemon-species/${id}`)
+      return response;
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  

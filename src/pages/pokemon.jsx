@@ -33,7 +33,6 @@ export default function Pokemon(props) {
         getPokemonStats(idPokemon).then((response) => {
             response.data.names.forEach((names) => {
                 if (names.language.name === languageOption) {
-                    console.log(names.name.charAt(0).toUpperCase() + names.name.slice(1))
                     setPokemonData(prevState => ({
                         ...prevState,
                         pokeName: names.name.charAt(0).toUpperCase() + names.name.slice(1),
@@ -56,11 +55,9 @@ export default function Pokemon(props) {
                     }
                 })
             })
-            console.log(pokemonData)
         })
         getPokemonData(idPokemon.toLowerCase()).then((info) => {
             setPokemonImages(info.data.sprites);
-            console.log(info)
             setPokemonData(prevState => ({
                 ...prevState,
                 height: info.data.height,

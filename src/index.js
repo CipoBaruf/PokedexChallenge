@@ -10,9 +10,7 @@ import './styles/index.css'
 ReactDOM.render(
   <Router>
     <Switch>
-      <Route path="/pokemon">
-        <Pokemon />
-      </Route>
+    <Route path="/pokemon/:idPokemon" component={Pokemon} /> 
       <Route path="/">
         <Home />
       </Route>

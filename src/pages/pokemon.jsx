@@ -9,7 +9,7 @@ import { getPokemon, getPokemonStats, getPokemonData } from '../API.js'
 
 import ImageCarrousel from '../components/ImagesCarousel.jsx';
 
-export default function Pokemon(props) {
+export default function Pokemon() {
 
     const [loading, setLoading] = useState(false);
 
@@ -80,7 +80,7 @@ export default function Pokemon(props) {
                         </select>
                     </div>
                     <div className="flex flex-col items-center justify-center h-full -mt-20">
-                        <div className="bg-white absolute z-0 h-40 w-80 md:h-64 md:w-3/12 mt-40 md:mt-44 rounded-xl border-gray-200 border-4"></div>
+                        <div className="bg-white absolute z-0 h-40 w-80 md:h-64 md:w-96 mt-40 md:mt-44 rounded-xl border-gray-200 border-4"></div>
                         <ImageCarrousel images={pokemonImages} color={pokemonData.color} />
                         <p className="z-50 md:mt-6 text-xl md:text-4xl text-center font-semibold tracking-wider text-gray-700">{pokemonData.pokeName}</p>
                         <div className="flex justify-center space-x-8 items-center z-50 mt-2 md:mt-4">

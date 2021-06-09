@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react';
 
-import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 import { getPokemons, getPokemon, getPokemonData } from '../API.js'
 
 import PokemonItem from '../components/PokemonItem'
 
 export default function Home() {
+
+    const history = useHistory();
 
     const [pokemons, setPokemons] = useState([{ id: 0, name: '', image: '' }]);
 
@@ -54,17 +56,17 @@ export default function Home() {
                 <h1 className="text-lg md:text-4xl mb-4 md:mb-20 font-bold tracking-widest text-gray-700">Pokedex Challenge</h1>
                 <div className="flex flex-wrap md:flex-row items-center justify-center">
                     {!loading && pokemons ? pokemons.map((pokemon, index) =>
-                        <Link to={`/pokemon/${pokemon.id}`} key={index}>
+                        <button type="button" onClick={()=> history.push(`/pokemon/${pokemon.id}`)} key={index}>
                             <PokemonItem pokemon={pokemon} />
-                        </Link>
+                        </button>
                     )
                         :
                         <p>Loading</p>
                     }
                 </div>
                 <div className="flex items-center justify-center space-x-5 mt-8 md:mt-24">
-                    <button disabled={prevNext.prev === null} onClick={() => setNewCall(prevNext.prev)} className="btn">Previous</button>
-                    <button disabled={prevNext.next === null} onClick={() => setNewCall(prevNext.next)} className="btn">Next</button>
+                    <button type="button" disabled={prevNext.prev === null} onClick={() => setNewCall(prevNext.prev)} className="btn">Previous</button>
+                    <button type="button" disabled={prevNext.next === null} onClick={() => setNewCall(prevNext.next)} className="btn">Next</button>
                 </div>
             </div>
         </div>
